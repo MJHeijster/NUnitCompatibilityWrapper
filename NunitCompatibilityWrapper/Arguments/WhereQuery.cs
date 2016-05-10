@@ -73,7 +73,6 @@
                     whereQuery = whereQuery + " and ";
                 }
                 firstInclude = false;
-                usesInclude = true;
             }
             if (!include && !firstExclude)
             {
@@ -82,7 +81,6 @@
             else if (!include && firstExclude)
             {
                 firstExclude = false;
-                usesExclude = true;
             }
         }
 
@@ -93,17 +91,19 @@
         /// <param name="include">If set to <c>true</c>, the categories should be included.</param>
         private static void AddToWhereQuery(string category, bool include)
         {
-            if (!usesExclude && !usesInclude)
+            if ((usesExclude && !include) || (usesInclude && include))
             {
                 whereQuery = include ? whereQuery + " or " : whereQuery + " and ";
             }
             if (include)
             {
                 whereQuery = whereQuery + "Category == " + category;
+                usesInclude = true;
             }
             else
             {
                 whereQuery = whereQuery + "Category != " + category;
+                usesExclude = true;
             }
         }
     }
