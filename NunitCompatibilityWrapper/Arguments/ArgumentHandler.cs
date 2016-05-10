@@ -10,6 +10,12 @@ namespace NunitCompatibilityWrapper.Arguments
 {
     public static class ArgumentHandler
     {
+        /// <summary>
+        /// Handles the argument.
+        /// </summary>
+        /// <param name="arg">The argument.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="newArguments">The new arguments.</param>
         public static void HandleArgument(string arg, string fileName, ref string newArguments)
         {
             if (arg.StartsWith("-xml"))
